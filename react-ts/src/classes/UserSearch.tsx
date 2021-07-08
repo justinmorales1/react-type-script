@@ -1,5 +1,6 @@
 import { Component } from 'react';
 
+//Interface for user
 interface User {
   name: string;
   age: number;
