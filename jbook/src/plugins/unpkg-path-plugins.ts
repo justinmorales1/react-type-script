@@ -31,39 +31,7 @@ export const unpkgPathPlugin = (input: string) => {
           path: `https://unpkg.com/${args.path}`
         };
       });
- 
-    
-      build.onLoad({ filter: /.*/ }, async (args: any) => {
-        console.log('onLoad', args);
- 
-        if (args.path === 'index.js') {
-          return {
-            loader: 'jsx',
-            contents: input
-          };
-        } ;
 
-        // Check to see if we have already fetch this file and 
-        const cachedResult = await fileCache.getItem<esbuild.OnLoadResult>(args.path);
-        
-        //if it is in the cache, return it.
-        if (cachedResult) {
-          return cachedResult;
-        }
-
-        const { data, request } = await axios.get(args.path);     
-
-        const result: esbuild.OnLoadResult =  {
-          loader: 'jsx',
-          contents: data,
-          resolveDir: new URL('./', request.responseURL).pathname
-        }
-        // Store response in cache.
-        await fileCache.setItem(args.path, result);
-
-        return result;
-
-      });
-    },
+    }
   };
 };
