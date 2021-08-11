@@ -16,4 +16,4 @@ for (var _i = 0, _a = matchReader.matches; _i < _a.length; _i++) {
         manUnitedWins++;
     }
 }
-console.log("Manchester United Won:", manUnitedWins);
+console.log("Manchester United Won:", manUnitedWins, " games.");
