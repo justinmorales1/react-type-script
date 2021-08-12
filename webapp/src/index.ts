@@ -5,18 +5,17 @@ const user = new User({name: "Elvira", age: 30});
 
 
 
-user.save();
-
-
 // user.set({name: "Elvira", age: 31})
 
 // console.log(user.get('name'))
 // console.log(user.get("age"))
 
 
-// user.on('change', () => {
-//   console.log("Change number 1")
-// })
+user.events.on('change', () => {
+  console.log("Change number 1")
+})
+
+user.events.trigger('change')
 
 // user.on('change', () => {
 //   console.log("Change number 2")
