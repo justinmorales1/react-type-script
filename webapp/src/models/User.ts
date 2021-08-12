@@ -1,17 +1,13 @@
-
+import axios, {AxiosResponse} from "axios";
 
 interface UserProps {
   name?: string; //Question mark makes the property optional
   age?:number;
+  id?: number;
 }
 
 
-type Callback = () => {}
-
 export class User {
-  events: {[key: string]: Callback[]} = {};
-
-
   constructor(private data:  UserProps){}
 
   get(propName: string): (number | string) {
@@ -22,9 +18,21 @@ export class User {
     Object.assign(this.data, update);
   }
 
+  fetch(): void {
+    axios.get(`http://localhost:3000/users/${this.get('id')}`).then((response: AxiosResponse) : void => {
+      this.set(response.data);
+    })
+  }
 
-  on(eventName: string, callBack: Callback) {
 
+  save(): void {
+    const id = this.get('id');
+    if(id) {
+      axios.put(`http://localhost:3000/users/${id}`, this.data);
+    } else {
+      axios.post('http://localhost:3000/users', this.data)
+    }
+    
   }
 
 }
