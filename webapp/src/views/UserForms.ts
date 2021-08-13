@@ -12,11 +12,11 @@ export class UserForm {
     `
   }
 
-render(): void {
-  const templateElement = document.createElement('template');
-  templateElement.innerHTML = this.template();
+  render(): void {
+    const templateElement = document.createElement('template');
+    templateElement.innerHTML = this.template();
 
-  this.parent.append(templateElement.content);
-}
+    this.parent.append(templateElement.content);
+  }
 
 }
